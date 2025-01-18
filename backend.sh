@@ -66,13 +66,10 @@ curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expen
 VALIDATE $? "downloading backend"
 
 cd /app
-VALIDATE $? "switching to app dir"
+rm -rf /app/*
 
 unzip /tmp/backend.zip  &>>$LOG_FILE_NAME
 VALIDATE $? "Unzipping backend"
-
-cd /app
-VALIDATE $? "switching to app dir"
 
 npm install  &>>$LOG_FILE_NAME
 VALIDATE $? "Installing npm"
