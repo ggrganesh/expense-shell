@@ -44,8 +44,14 @@ VALIDATE $? "Enabling nodejs:20"
 dnf install nodejs -y &>>$LOG_FILE_NAME
 VALIDATE $? "Installing Node js"
 
-useradd expense &>>$LOG_FILE_NAME
-VALIDATE $? "adding expense user"
+id -u expense &>>$LOG_FILE_NAME
+  if [$? -ne 0]
+  then
+     useradd expense &>>$LOG_FILE_NAME
+      VALIDATE $? "adding expense user"
+  else
+  echo -e "expense user already exist....$Y SKIPPING $N"
+  fi
 
 mkdir /app
 VALIDATE $? "Creating app dir"
@@ -65,7 +71,7 @@ VALIDATE $? "switching to app dir"
 npm install  &>>$LOG_FILE_NAME
 VALIDATE $? "Installing npm"
 
-cp /home/ec2-user/backend.service /etc/systemd/system/
+cp /home/ec2-user/expense-shell/backend.service /etc/systemd/system/
 VALIDATE $? "coping backend service config file"
 
 systemctl daemon-reload  &>>$LOG_FILE_NAME
