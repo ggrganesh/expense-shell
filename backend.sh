@@ -62,7 +62,7 @@ mkdir -p /app
     echo -e "app directory already created.....$Y SKIPPING $N"  &>>$LOG_FILE_NAME
   fi
 
-curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip  &>>$LOG_FILE_NAME
 VALIDATE $? "downloading backend"
 
 cd /app
