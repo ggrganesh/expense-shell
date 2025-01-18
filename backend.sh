@@ -99,8 +99,8 @@ VALIDATE $? "setting transaction schema and tables"
 systemctl daemon-reload  &>>$LOG_FILE_NAME
 VALIDATE $? "Reloading daemon " 
 
-systemctl restart backend  &>>$LOG_FILE_NAME
-VALIDATE $? "Restarting backend service"
-
 systemctl enable backend &>>$LOG_FILE_NAME
-VALIDATE $? "enabling backend service" 
+VALIDATE $? "enabling backend service"
+
+systemctl restart backend  &>>$LOG_FILE_NAME
+VALIDATE $? "Restarting backend service" 
