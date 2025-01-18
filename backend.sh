@@ -23,7 +23,7 @@ VALIDATE(){
 
 CHECK_ROOT(){
 
-    if [ $USERID -ne -0 ]
+    if [ $USERID -ne 0 ]
     then
        echo "ERROR: you must have sudo access"
        exit1 ## other then the root 
@@ -50,7 +50,7 @@ id -u expense &>>$LOG_FILE_NAME
       useradd expense &>>$LOG_FILE_NAME
       VALIDATE $? "adding expense user"
   else
-  echo -e "expense user already exist....$Y SKIPPING $N"
+  echo -e "expense user already exist....$Y SKIPPING $N"   &>>$LOG_FILE_NAME
   fi
 
 mkdir -p /app
@@ -59,7 +59,8 @@ mkdir -p /app
      mkdir /app
      VALIDATE $? "Creating app dir"
   else
-    echo "app directory already created.....$Y SKIPPING $N"
+    echo -e "app directory already created.....$Y SKIPPING $N"  &>>$LOG_FILE_NAME
+  fi
 
 curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
 VALIDATE $? "downloading backend"
