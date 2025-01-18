@@ -93,14 +93,14 @@ VALIDATE $? "enabling backend service"
 dnf install mysql -y  &>>$LOG_FILE_NAME
 VALIDATE $? "installing MySQL client"
 
-mysql -h mysql.ganeshdevops.online -uroot -pExpenseApp@1 < /app/schema/backend.sql
+mysql -h mysql.ganeshdevops.online -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$LOG_FILE_NAME
 VALIDATE $? "setting transaction schema and tables"
 
-systemctl daemon-reload  &>>$LOG_FILE_NAME
-VALIDATE $? "Reloading daemon " 
+systemctl daemon-reload &>>$LOG_FILE_NAME
+VALIDATE $? "Daemon Reload"
 
 systemctl enable backend &>>$LOG_FILE_NAME
-VALIDATE $? "enabling backend service"
+VALIDATE $? "Enabling backend"
 
-systemctl restart backend  &>>$LOG_FILE_NAME
-VALIDATE $? "Restarting backend service" 
+systemctl restart backend &>>$LOG_FILE_NAME
+VALIDATE $? "Starting Backend"
