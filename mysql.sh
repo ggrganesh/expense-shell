@@ -48,11 +48,12 @@ VALIDATE $?  "My sql servcie started"
 
 if [ $? -ne 0 ]
 then
+
   echo "MYSQL Root password is not setup"   &>>$LOG_FILE_NAME
   mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOG_FILE_NAME
   VALIDATE $?  "Setting up root password"
 
 else
-  echo "MYSQL Root password already setup.... $Y SKIPPING $N"
+  echo -e "MYSQL Root password already setup.... $Y SKIPPING $N"
 
 fi
