@@ -44,15 +44,15 @@ VALIDATE $? "enabling mysqld"
 systemctl start mysqld &>>$LOG_FILE_NAME
 VALIDATE $?  "My sql servcie started"
 
-mysql_secure_installation --set-root-pass ExpenseApp@1
-VALIDATE $?   "setting of Root password for mysql"
+ mysql -h mysql.ganeshdevops.online -u root -pExpenseApp@1 -e 'show databases;'  &>>$LOG_FILE_NAME
 
 if [ $? -ne 0 ]
 then
-  echo "MYSQL Root password is not setup"
+  echo "MYSQL Root password is not setup"   &>>$LOG_FILE_NAME
+  mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOG_FILE_NAME
   VALIDATE $?  "Setting up root password"
 
 else
-  echo "MYSQL Root password already setup.... $Y Skipping $N"
-  
+  echo "MYSQL Root password already setup.... $Y SKIPPING $N"
+
 fi
