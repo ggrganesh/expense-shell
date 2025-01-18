@@ -44,17 +44,17 @@ VALIDATE $? "Enabling nodejs:20"
 dnf install nodejs -y &>>$LOG_FILE_NAME
 VALIDATE $? "Installing Node js"
 
-id -u expense &>>$LOG_FILE_NAME
-  if [$? -ne 0]
+id -u expense &>>$LOG_FILE_NAME 
+  if [ $? -ne 0 ]
   then
-     useradd expense &>>$LOG_FILE_NAME
+      useradd expense &>>$LOG_FILE_NAME
       VALIDATE $? "adding expense user"
   else
   echo -e "expense user already exist....$Y SKIPPING $N"
   fi
 
 mkdir -p /app
-  if [$? -ne 0]
+  if [ $? -ne 0 ]
   then
      mkdir /app
      VALIDATE $? "Creating app dir"
