@@ -92,7 +92,12 @@ dnf install mysql -y  &>>$LOG_FILE_NAME
 VALIDATE $? "installing MySQL client"
 
 mysql -h mysql.ganeshdevops.online -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$LOG_FILE_NAME
-VALIDATE $? "setting transaction schema and tables"
+if [ $? -ne 0 ]; then
+    echo -e "Error while setting transaction schema and tables. Check $LOG_FILE_NAME for details."
+    exit 1
+else
+    echo -e "setting transaction schema and tables ... SUCCESS"
+fi
 
 systemctl daemon-reload &>>$LOG_FILE_NAME
 VALIDATE $? "Daemon Reload"
