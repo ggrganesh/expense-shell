@@ -33,6 +33,8 @@ CHECK_ROOT(){
 
 echo "Script started executing at: $TIMESTAMP" &>>$LOG_FILE_NAME
 
+mkdir -p $LOGS_FOLDER
+
 CHECK_ROOT
 
 dnf install mysql-server -y &>>$LOG_FILE_NAME
