@@ -53,6 +53,9 @@ VALIDATE $? "downloading frontend files"
 cd /usr/share/nginx/html  &>>$LOG_FILE_NAME
 VALIDATE $? "moving to html code to dir"
 
+unzip /tmp/frontend.zip  &>>$LOG_FILE_NAME
+VALIDATE $? "unzipping the frontend files"
+
 cp /home/ec2-user/expense-shell/expense.conf /etc/nginx/default.d/  &>>$LOG_FILE_NAME
 VALIDATE $? "coping expense html conf file"
 
